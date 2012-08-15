@@ -10,10 +10,10 @@ How it Works
 -------------
 AutoValid depends on the structure of your form. It's a simple structure that looks like so (assuming you have 3 steps):
 	```html
-	<form id="form">  
-		<div class="step">  
-			<input type="text" min="5" max="35">  
-			<button type="submit" class="submit">Continue</button>  
+	<form id="form">
+		<div class="step">
+			<input type="text" min="5" max="35">
+			<button type="submit" class="submit">Continue</button>
 		</div>  
 		<div class="step">  
 			<input type="text" class="phone">  
