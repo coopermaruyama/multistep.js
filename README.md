@@ -1,10 +1,10 @@
 AutoValid
 ==========
-AutoValid is a simple javascript file dependent on jQuery that allows you to create multi-step forms with validation without having to add any form of extra javascript to your files. It's extremely convenient if you make many sites with forms on it.
+AutoValid is a **simple** javascript dependent on jQuery which allows you to create **sliding multi-step forms with validation** without having to add *any* form of extra javascript to your page. It's extremely convenient if you make many sites with forms on it.
 
 AutoValid automatically validates all input field types including check boxes, radios, and drop-down lists. It validates string length, emails, phone numbers, and checked box count. It allows you to set a minimum/maximum length on any input field without using javascript.
 
-AutoValid is also nice to use because it validation each field independently on it's "onChange" event, so that the user is notified whether what they just typed into a field is valid as soon as they change its value.
+AutoValid is also nice to use because it validates each field independently on it's "onChange" event, so that the user is notified whether what they just typed into a field is valid as soon as they change its value.
 
 See a Demo: [jsFiddle](http://jsfiddle.net/gh/get/jquery/1.7.2/coopermaruyama/autovalid/tree/master/Demo/ "AutoValid Demo")
 
@@ -16,6 +16,10 @@ AutoValid depends on the structure of your form. It's a simple structure that lo
 	<form id="form">
 		<div class="step">
 			<input type="text" min="5" max="35">
+			<select>
+				<option value="">Select One..</option>
+				<option value="yes">Yes</option>
+				<option valud="no">No</option>
 			<button type="submit" class="submit">Continue</button>
 		</div>  
 		<div class="step">  
@@ -40,7 +44,11 @@ The basic structure is:
 
 Options
 ---------
-The above illustrated form has 3 steps. note that min & max attributes on the first input and the first checkbox. By setting the min attribute and max atribute on a text input, you can set the minimum length and maximum length. By setting the min attribute on the FIRST checkbox in a set of checkboxes, you can set a minimum amount of checkboxes that must be checked in order to be valid. All this, without any javascript :)
+The above illustrated form has 3 steps. note that min & max attributes on the first input and the first checkbox. 
+- By setting the min attribute and max atribute on a text input, you can set the minimum length and maximum length. 
+- By setting the min attribute on the FIRST checkbox in a set of checkboxes, you can set a minimum amount of checkboxes that must be checked in order to be valid. 
+- By setting the value of an option in a select list to "" (as seen above for 'Select One'), you identify which option is invalid.
+All this, without any javascript :)
 
 Installation
 ---------------
