@@ -1,0 +1,164 @@
+<html>
+	<head>
+		<title>AutoValid</title>
+		<script type="text/javascript" src="autovalid.js"></script>
+		<link rel="stylesheet" href="autovalid.css">
+		<style type="text/css">
+		/* DEMO CSS */
+			html,body {
+				margin:0;
+				height: 100%;
+				width: 100%;
+						
+			}
+			#form-container {
+
+				width: 420px;
+				height: 724px;
+				background-color: #466c9b;
+				border-radius: 10px;
+				border: 1px solid #2f4d70;
+				z-index:3;
+				margin: 0 auto;
+			}
+			#form-inner {
+				background: #f9f9f9; /* Old browsers */
+				background: -moz-linear-gradient(left, #f9f9f9 0%, #ffffff 50%, #f9f9f9 100%); /* FF3.6+ */
+				background: -webkit-gradient(linear, left top, right top, color-stop(0%,#f9f9f9), color-stop(50%,#ffffff), color-stop(100%,#f9f9f9)); /* Chrome,Safari4+ */
+				background: -webkit-linear-gradient(left, #f9f9f9 0%,#ffffff 50%,#f9f9f9 100%); /* Chrome10+,Safari5.1+ */
+				background: -o-linear-gradient(left, #f9f9f9 0%,#ffffff 50%,#f9f9f9 100%); /* Opera 11.10+ */
+				background: -ms-linear-gradient(left, #f9f9f9 0%,#ffffff 50%,#f9f9f9 100%); /* IE10+ */
+				background: linear-gradient(to right, #f9f9f9 0%,#ffffff 50%,#f9f9f9 100%); /* W3C */
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9f9f9', endColorstr='#f9f9f9',GradientType=1 ); /* IE6-9 */
+				width: 370px;
+				height: 675px;
+				margin: 10px auto;
+				padding: 15px;
+				border-radius: 10px;
+			}
+			#formtitle {
+				color: #325175;
+				font-size: 40px;
+				margin: 5px 0px;
+			}
+			#form-subtitle {
+				font-weight: normal;
+				font-size: 27px;
+				margin-top:-7px;
+				margin-bottom:5px;
+			}
+			.form-hr {
+				width: 397px;
+				margin-left:-14px;
+				margin-top: 15px;
+				margin-bottom: 15px;
+			}
+			#form {
+				margin-left: 90px;	
+			}
+		</style>
+	</head>
+	<body>
+		<div id="form-container">
+					<div id="form-inner">
+							<!-- START FORM HTML -->
+						<form action="#submitted" id="form">
+							<!-- DONT PUT ANYTHING HERE! -->
+							<div class="step">
+								<p>Name(min 5, max 10):
+								</p>
+								<input type="text" id="name" min="5" max="10" >
+								<p>Phone:
+								</p>
+								<input type="text" id="phone" class="phone">
+								<p>E-mail:
+								</p>
+								<input type="text" id="email" class="email">
+								<p>Checkboxes (at least one):
+								</p>
+								<input type="checkbox" name="checks">1
+								<input type="checkbox" name="checks">2
+								<input type="checkbox" name="checks">3
+								<p>Radio:
+								</p>
+								<input  type="radio" name="radios">1
+								<input type="radio" name="radios">2
+								<input type="radio" name="radios">3
+								<p>Select List</p>
+								<select name="select" >
+									<option value="">Select One</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+								</select>
+								<p></p>
+								<input type="submit" class="submit">
+							</div>
+							<div class="step">
+								<p>Name:
+								</p>
+								<input type="text" id="name" min="5" max="10" >
+								<p>Phone:
+								</p>
+								<input type="text" id="phone" class="phone">
+								<p>E-mail:
+								</p>
+								<input type="text" id="email" class="email">
+								<p>Checkboxes (at least one):
+								</p>
+								<input type="checkbox" name="checks2">1
+								<input type="checkbox" name="checks2">2
+								<input type="checkbox" name="checks2">3
+								<p>Radio:
+								</p>
+								<input  type="radio" name="radios2">1
+								<input type="radio" name="radios2">2
+								<input type="radio" name="radios2">3
+								<p>Select List</p>
+								<select name="select" >
+									<option value="">Select One</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+								</select>
+								<p></p>
+								<input type="submit" class="submit">
+							</div>
+							<div class="step" id="last-step">
+								<p>Name:
+								</p>
+								<input type="text" id="name" min="5" max="10" >
+								<p>Phone:
+								</p>
+								<input type="text" id="phone" class="phone">
+								<p>E-mail:
+								</p>
+								<input type="text" id="email" class="email">
+								<p>Checkboxes (at least one):
+								</p>
+								<input type="checkbox" name="checks3">1
+								<input type="checkbox" name="checks3">2
+								<input type="checkbox" name="checks3">3
+								<p>Radio:
+								</p>
+								<input  type="radio" name="radios3">1
+								<input type="radio" name="radios3">2
+								<input type="radio" name="radios3">3
+								<p>Select List</p>
+								<select name="select" >
+									<option value="">Select One</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+								</select>
+								<p></p>
+								<input type="submit" class="submit">
+							</div>
+								<!-- START HIDDEN INPUTS, ETC  -->
+								<!-- END HIDDEN INPUTS, ETC -->
+						</form>
+						<!-- END FORM HTML -->
+					</div>
+				</div>
+	</body>
+</html>
