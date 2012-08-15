@@ -28,7 +28,7 @@ AutoValid depends on the structure of your form. It's a simple structure that lo
 			<input type="text" class="email">  
 			<button type="submit" class="submit">Continue</button>  
 		</div>  
-		<div class="step last">  
+		<div class="step" id="last-step">  
 			<input type="checkbox" name="checks" min="2">1  
 			<input type="checkbox" name="checks">2  
 			<input type="checkbox" name="checks">3  
@@ -40,7 +40,7 @@ AutoValid depends on the structure of your form. It's a simple structure that lo
 The basic structure is:
 - A form must have the id of "form"
 - Each step must be it's immediate child with the class "step"
-- The last step must have the class of "last" as well
+- The last step must have the id of "last-step" as well
 - The submit button on each step needs the class "submit"
 
 Options
