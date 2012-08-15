@@ -9,7 +9,7 @@ AutoValid is also nice to use because it validation each field independently on 
 How it Works
 -------------
 AutoValid depends on the structure of your form. It's a simple structure that looks like so (assuming you have 3 steps):
-	&lt;form id="form"&gt;
+	`&lt;form id="form"&gt;
 		&lt;div class="step"&gt;
 			&lt;input type="text" min="5" max="35"&gt;
 			&lt;button type="submit" class="submit"&gt;Continue&lt;/button&gt;
@@ -25,7 +25,7 @@ AutoValid depends on the structure of your form. It's a simple structure that lo
 			&lt;input type="checkbox" name="checks"&gt;3
 			&lt;button type="submit" class="submit"&gt;Submit&lt;/button&gt;
 		&lt;/div&gt;
-	&lt;/form&gt;
+	&lt;/form&gt;`
 
 The basic structure is:
 - A form must have the id of "form"
