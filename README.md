@@ -28,7 +28,7 @@ AutoValid depends on the structure of your form. It's a simple structure that lo
 			<button type="submit" class="submit">Submit</button>  
 		</div>  
 	</form>
-     ```
+   ```
 
 The basic structure is:
 - A form must have the id of "form"
