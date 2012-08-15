@@ -9,23 +9,23 @@ AutoValid is also nice to use because it validation each field independently on 
 How it Works
 -------------
 AutoValid depends on the structure of your form. It's a simple structure that looks like so (assuming you have 3 steps):
-	<form id="form">
-		<div class="step">
-			<input type="text" min="5" max="35">
-			<button type="submit" class="submit">Continue</button>
-		</div>
-		<div class="step">
-			<input type="text" class="phone">
-			<input type="text" class="email">
-			<button type="submit" class="submit">Continue</button>
-		</div>
-		<div class="step last">
-			<input type="checkbox" name="checks" min="2">1
-			<input type="checkbox" name="checks">2
-			<input type="checkbox" name="checks">3
-			<button type="submit" class="submit">Submit</button>
-		</div>
-	</form>
+	&lt;form id="form"&gt;
+		&lt;div class="step"&gt;
+			&lt;input type="text" min="5" max="35"&gt;
+			&lt;button type="submit" class="submit"&gt;Continue&lt;/button&gt;
+		&lt;/div&gt;
+		&lt;div class="step"&gt;
+			&lt;input type="text" class="phone"&gt;
+			&lt;input type="text" class="email"&gt;
+			&lt;button type="submit" class="submit"&gt;Continue&lt;/button&gt;
+		&lt;/div&gt;
+		&lt;div class="step last"&gt;
+			&lt;input type="checkbox" name="checks" min="2"&gt;1
+			&lt;input type="checkbox" name="checks"&gt;2
+			&lt;input type="checkbox" name="checks"&gt;3
+			&lt;button type="submit" class="submit"&gt;Submit&lt;/button&gt;
+		&lt;/div&gt;
+	&lt;/form&gt;
 
 The basic structure is:
 - A form must have the id of "form"
@@ -43,9 +43,9 @@ Installation
 2. Copy the autovalid folder to your website directory.
 3. Add AutoValid to your header like so (assuming Autovalid is in the same directory as the web page):
 
-	<script src="http://code.jquery.com/jquery-latest-min.js"></script>
-	<script type="text/javascript" src="autovalid/autovalid.js"></script>
-	<link rel="stylesheet" href="autovalid/autovalid.css">
+	&lt;script src="http://code.jquery.com/jquery-latest-min.js"&gt;&lt;/script&gt;
+	&lt;script type="text/javascript" src="autovalid/autovalid.js"&gt;&lt;/script&gt;
+	&lt;link rel="stylesheet" href="autovalid/autovalid.css"&gt;
 4. That's it! Now create an awesome form in seconds and enjoy!
 
 You can always look at demo.html included in the ZIP file to see an example.
