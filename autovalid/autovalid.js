@@ -106,10 +106,12 @@
     form = $('#form');
     input = '#form > .step input';
     ($(input + '[type=text],' + input + '[type=password],' + input + '[type=email]')).change(function() {
-      if (validateText($(this).val(), $(this).attr('min'), $(this).attr('max'))) {
-        return $(this).removeClass('error').addClass('success').attr('valid', 'true');
-      } else {
-        return $(this).removeClass('success').addClass('error').attr('valid', 'false');
+      if (($(this)).attr('optional') !== "yes") {
+        if (validateText($(this).val(), $(this).attr('min'), $(this).attr('max'))) {
+          return $(this).removeClass('error').addClass('success').attr('valid', 'true');
+        } else {
+          return $(this).removeClass('success').addClass('error').attr('valid', 'false');
+        }
       }
     });
     ($(input + '.phone')).change(function() {
@@ -172,7 +174,7 @@
       window.validitems = 0;
       thisStep.children(input + '[type=text],' + input + '[type=password],' + input + '[type=email]').each(function() {
         window.totalitems++;
-        if ($(this).attr('valid') === 'true') {
+        if ($(this).attr('valid') === 'true' || ($(this)).attr('optional') === "yes") {
           window.validitems++;
         } else {
           $(this).removeClass('success').addClass('error').focus();

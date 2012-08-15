@@ -23,6 +23,7 @@ AutoValid depends on the structure of your form. It's a simple structure that lo
 			<button type="submit" class="submit">Continue</button>
 		</div>  
 		<div class="step">  
+			<input type="text" optional="yes">
 			<input type="text" class="phone">  
 			<input type="text" class="email">  
 			<button type="submit" class="submit">Continue</button>  
@@ -45,6 +46,7 @@ The basic structure is:
 Options
 ---------
 The above illustrated form has 3 steps. note that min & max attributes on the first input and the first checkbox. 
+- By setting `optional="yes"` on any text input, you make it optional and therefore bypass validation.
 - By setting the min attribute and max atribute on a text input, you can set the minimum length and maximum length. 
 - By setting the min attribute on the FIRST checkbox in a set of checkboxes, you can set a minimum amount of checkboxes that must be checked in order to be valid. 
 - By setting the value of an option in a select list to "" (as seen above for 'Select One'), you identify which option is invalid.

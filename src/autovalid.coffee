@@ -47,9 +47,10 @@ $ ->
 	window.valid = false
 	form = $('#form')
 	input = '#form > .step input'
-	#blur validation
+	#onchange validation
 	($ input+'[type=text],'+input+'[type=password],'+input+'[type=email]').change ->
-		if validateText($(this).val(), $(this).attr('min'), $(this).attr('max')) then $(this).removeClass('error').addClass('success').attr('valid','true') else $(this).removeClass('success').addClass('error').attr('valid','false')
+		unless ($ this).attr('optional') is "yes"
+			if validateText($(this).val(), $(this).attr('min'), $(this).attr('max')) then $(this).removeClass('error').addClass('success').attr('valid','true') else $(this).removeClass('success').addClass('error').attr('valid','false')
 	($ input+'.phone').change ->
 		if isPhone($(this).val()) then $(this).removeClass('error').addClass('success').attr('valid','true') else $(this).removeClass('success').addClass('error').attr('valid','false')
 	($ input+'.email').change ->
@@ -79,7 +80,7 @@ $ ->
 		#validate textboxes
 		thisStep.children(input+'[type=text],'+input+'[type=password],'+input+'[type=email]').each ->
 			window.totalitems++
-			if $(this).attr('valid') is 'true'
+			if $(this).attr('valid') is 'true' or ($ this).attr('optional') is "yes"
 				window.validitems++
 			else
 				$(this).removeClass('success').addClass('error').focus()
