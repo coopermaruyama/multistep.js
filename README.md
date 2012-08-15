@@ -9,7 +9,8 @@ AutoValid is also nice to use because it validation each field independently on 
 How it Works
 -------------
 AutoValid depends on the structure of your form. It's a simple structure that looks like so (assuming you have 3 steps):
-	`<form id="form">  
+	```html
+	<form id="form">  
 		<div class="step">  
 			<input type="text" min="5" max="35">  
 			<button type="submit" class="submit">Continue</button>  
@@ -25,7 +26,8 @@ AutoValid depends on the structure of your form. It's a simple structure that lo
 			<input type="checkbox" name="checks">3  
 			<button type="submit" class="submit">Submit</button>  
 		</div>  
-	</form>  `
+	</form> 
+	```
 
 The basic structure is:
 - A form must have the id of "form"
@@ -43,9 +45,11 @@ Installation
 2. Copy the autovalid folder to your website directory.
 3. Add AutoValid to your header like so (assuming Autovalid is in the same directory as the web page):
 
-	 `<script src="http://code.jquery.com/jquery-latest-min.js"></script>  
+	 ```html
+	 <script src="http://code.jquery.com/jquery-latest-min.js"></script>  
 	 <script type="text/javascript" src="autovalid/autovalid.js"></script>  
-	 <link rel="stylesheet" href="autovalid/autovalid.css">`
+	 <link rel="stylesheet" href="autovalid/autovalid.css">
+	 ```
 4. That's it! Now create an awesome form in seconds and enjoy!
 
 You can always look at demo.html included in the ZIP file to see an example.
