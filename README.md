@@ -6,6 +6,8 @@ AutoValid automatically validates all input field types including check boxes, r
 
 AutoValid is also nice to use because it validation each field independently on it's "onChange" event, so that the user is notified whether what they just typed into a field is valid as soon as they change its value.
 
+See a Demo: [jsFiddle](http://jsfiddle.net/gh/get/jquery/1.7.2/coopermaruyama/autovalid/tree/master/Demo/ "AutoValid Demo")
+
 How it Works
 -------------
 AutoValid depends on the structure of your form. It's a simple structure that looks like so (assuming you have 3 steps):

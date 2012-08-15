@@ -16,11 +16,11 @@ form .step {
 	box-shadow: 0px 0px 5px rgba(50,50,200,.7);
 }
 #form input[type=text].success,#form input[type=email].success,#form input[type=password].success {
-	background: white url('input-success-small.png') no-repeat 97% center;
+	background: white url('https://github.com/coopermaruyama/autovalid/blob/master/Demo/input-success-small.png?raw=true') no-repeat 97% center;
 	box-shadow: 0px 0px 4px rgba(10,240,10,.5);
 }
 #form input[type=text].error,#form input[type=email].error,#form input[type=password].error {
-	background: white url('input-error-small.png') no-repeat 97% center;
+	background: white url('https://github.com/coopermaruyama/autovalid/blob/master/Demo/input-error-small.png?raw=true') no-repeat 97% center;
 	box-shadow: 0px 0px 4px rgba(240,10,10,.5);
 }
 #form select.error {
