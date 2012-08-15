@@ -9,25 +9,25 @@ AutoValid is also nice to use because it validation each field independently on 
 How it Works
 -------------
 AutoValid depends on the structure of your form. It's a simple structure that looks like so (assuming you have 3 steps):
-	
-	<form id="form">
-		<div class="step">
-			<input type="text" min="5" max="35">
-			<button type="submit" class="submit">Continue</button>
-		</div>  
-		<div class="step">  
-			<input type="text" class="phone">  
-			<input type="text" class="email">  
-			<button type="submit" class="submit">Continue</button>  
-		</div>  
-		<div class="step last">  
-			<input type="checkbox" name="checks" min="2">1  
-			<input type="checkbox" name="checks">2  
-			<input type="checkbox" name="checks">3  
-			<button type="submit" class="submit">Submit</button>  
-		</div>  
-	</form> 
-	
+```html
+<form id="form">
+	<div class="step">
+		<input type="text" min="5" max="35">
+		<button type="submit" class="submit">Continue</button>
+	</div>  
+	<div class="step">  
+		<input type="text" class="phone">  
+		<input type="text" class="email">  
+		<button type="submit" class="submit">Continue</button>  
+	</div>  
+	<div class="step last">  
+		<input type="checkbox" name="checks" min="2">1  
+		<input type="checkbox" name="checks">2  
+		<input type="checkbox" name="checks">3  
+		<button type="submit" class="submit">Submit</button>  
+	</div>  
+</form> 
+```
 
 The basic structure is:
 - A form must have the id of "form"
