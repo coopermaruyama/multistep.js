@@ -1,4 +1,3 @@
-#eventually validate name, phone, email
 
 window.nameinput = #name properties (object)
 	maxlength: 35
@@ -42,89 +41,101 @@ window.isPhone = (input) ->
 window.is_int = (value) ->
 	if parseFloat(value) is parseInt(value) and !isNaN(value) then true else false
 
-$ ->
-	#init vars
-	window.valid = false
-	form = $('#form')
-	input = '#form > .step input'
-	#onchange validation
-	($ input+'[type=text],'+input+'[type=password],'+input+'[type=email]').change ->
-		unless ($ this).attr('optional') is "yes"
-			if validateText($(this).val(), $(this).attr('min'), $(this).attr('max')) then $(this).removeClass('error').addClass('success').attr('valid','true') else $(this).removeClass('success').addClass('error').attr('valid','false')
-	($ input+'.phone').change ->
-		if isPhone($(this).val()) then $(this).removeClass('error').addClass('success').attr('valid','true') else $(this).removeClass('success').addClass('error').attr('valid','false')
-	($ input+'.email').change ->
-		if validateEmail($(this).val()) then $(this).removeClass('error').addClass('success').attr('valid','true') else $(this).removeClass('success').addClass('error').attr('valid','false')
-		if $(this).val()? then $(this).addClass('success') else $(this).addClass('error')
-	($ input+'[type=radio]').change ->
-		name = $(this).attr('name')
-		if $('input[name='+name+']').is(':checked') then $('.error-text.radio').remove() else $('input[name='+name+']').first().before('<p class="error-text radio">Select an option!</p>')
-	($ input+'[type=checkbox]').change (e) ->
-		min = 1
-		max = 9999
-		min = $('input[name='+$(this).prop('name')+']').first().attr('min').match(/\d+/) if $('input[name='+$(this).prop('name')+']').first().attr('min')?
-		max = $('input[name='+$(this).prop('name')+']').first().attr('max').match(/\d+/) if $('input[name='+$(this).prop('name')+']').first().attr('max')?
-		if $('input[name='+$(this).prop('name')+']').is(':checked') and $('input[name=checks]:checked').length <= max and $('input[name=checks]:checked').length >= min
-			$('.error-text.checkbox').remove()
-		else
-			$('.error-text.checkbox').remove()		
-			$('input[name='+$(this).prop('name')+']').first().before('<p class="error-text checkbox">Select at least ' + min + ' boxes!</p>')
-	($ '#form > .step select').change ->
-		if $(this).val()? and ($ this).val() isnt '' then $(this).removeClass('error') else $(this).addClass('error')
-	#submit button validation
-	$('#form > .step .submit').click (e) ->
-		thisStep = $(this).parent()
-		e.preventDefault()
-		window.totalitems=0
-		window.validitems=0
-		#validate textboxes
-		thisStep.children(input+'[type=text],'+input+'[type=password],'+input+'[type=email]').each ->
-			window.totalitems++
-			if $(this).attr('valid') is 'true' or ($ this).attr('optional') is "yes"
-				window.validitems++
-			else
-				$(this).removeClass('success').addClass('error').focus()
-				false
-			console.log validitems, totalitems
-		#validate select lists
-		thisStep.children('select').each ->
-			window.totalitems++
-			if $(this).val()? and $(this).val() isnt ""
-				window.validitems++ 
-				$(this).removeClass('error')
-			else
-				$(this).addClass('error')
-		# validate radio
-		thisStep.children('input[type=radio]').each ->
+$ = jQuery
+
+$.fn.extend
+	autoValid: (options) ->
+
+		settings = #add settings
+			debug: true
+
+		settings = $.extend settings, options
+
+		log = (msg) ->
+			console?.log msg if settings.debug
+		#init vars
+		window.valid = false
+		form = this
+		step = $('.step', this)
+		#onchange validation
+		$("input:not([type=image],[type=button],[type=submit],[type=radio],[type=checkbox])",form).keyup ->
+			min = ($ this).attr('min') ? 3
+			unless ($ this).attr('optional') is "yes" or ($ this).val().length < min
+				if validateText($(this).val(), min, $(this).attr('max')) then $(this).removeClass('error').addClass('success').attr('valid','true') else $(this).removeClass('success').addClass('error').attr('valid','false')
+		($ 'input.phone', form).change ->
+			if isPhone($(this).val()) then $(this).removeClass('error').addClass('success').attr('valid','true') else $(this).removeClass('success').addClass('error').attr('valid','false')
+		($ 'input.email', form).change ->
+			if validateEmail($(this).val()) then $(this).removeClass('error').addClass('success').attr('valid','true') else $(this).removeClass('success').addClass('error').attr('valid','false')
+			if $(this).val()? then $(this).addClass('success') else $(this).addClass('error')
+		($ 'input[type=radio]', form).change ->
 			name = $(this).attr('name')
-			window.totalitems++
-			if $('input[name='+name+']').is(':checked')
-				window.validitems++ 
-			else
-				$('.error-text.radio').remove()
-				$('input[name='+name+']').first().before('<p class="error-text radio">Select an option!</p>')
-			console.log validitems, totalitems
-		# validate checkboxes
-		thisStep.children('input[type=checkbox]').each ->
-			window.totalitems++
+			if $('input[name='+name+']').is(':checked') then $('.error-text.radio').remove() else $('input[name='+name+']').first().before('<p class="error-text radio">Select an option!</p>')
+		($ 'input[type=checkbox]', form).change (e) ->
 			min = 1
 			max = 9999
 			min = $('input[name='+$(this).prop('name')+']').first().attr('min').match(/\d+/) if $('input[name='+$(this).prop('name')+']').first().attr('min')?
 			max = $('input[name='+$(this).prop('name')+']').first().attr('max').match(/\d+/) if $('input[name='+$(this).prop('name')+']').first().attr('max')?
-			name = $(this).attr('name')
 			if $('input[name='+$(this).prop('name')+']').is(':checked') and $('input[name=checks]:checked').length <= max and $('input[name=checks]:checked').length >= min
 				$('.error-text.checkbox').remove()
-				window.validitems++
 			else
 				$('.error-text.checkbox').remove()		
 				$('input[name='+$(this).prop('name')+']').first().before('<p class="error-text checkbox">Select at least ' + min + ' boxes!</p>')
-			console.log validitems, totalitems
-		if window.totalitems is window.validitems
-			unless thisStep.attr('id') is "last-step"
-				thisStep.slideUp()
-				thisStep.next('.step').slideDown()
-			else 
-				($ '#form').submit()
+		($ 'select', form).change ->
+			if $(this).val()? and ($ this).val() isnt '' then $(this).removeClass('error') else $(this).addClass('error')
+		#submit button validation
+		$('.step .submit', form).click (e) ->
+			thisStep = $(this).closest('.step')
+			e.preventDefault()
+			window.totalitems=0
+			window.validitems=0
+			#validate textboxes
+			$('input:not([type=image],[type=button],[type=submit],[type=radio],[type=checkbox])', thisStep).each ->
+				window.totalitems++
+				if $(this).attr('valid') is 'true' or ($ this).attr('optional') is "yes"
+					window.validitems++
+				else
+					$(this).removeClass('success').addClass('error').focus()
+					false
+				console.log validitems, totalitems
+			#validate select lists
+			$('select', thisStep).each ->
+				window.totalitems++
+				if $(this).val()? and $(this).val() isnt ""
+					window.validitems++ 
+					$(this).removeClass('error')
+				else
+					$(this).addClass('error')
+			# validate radio
+			$('input[type=radio]', thisStep).each ->
+				name = $(this).attr('name')
+				window.totalitems++
+				if $('input[name='+name+']').is(':checked')
+					window.validitems++ 
+				else
+					$('.error-text.radio').remove()
+					$('input[name='+name+']').first().before('<p class="error-text radio">Select an option!</p>')
+				console.log validitems, totalitems
+			# validate checkboxes
+			$('input[type=checkbox]', thisStep).each ->
+				window.totalitems++
+				min = 1
+				max = 9999
+				min = $('input[name='+$(this).prop('name')+']').first().attr('min').match(/\d+/) if $('input[name='+$(this).prop('name')+']').first().attr('min')?
+				max = $('input[name='+$(this).prop('name')+']').first().attr('max').match(/\d+/) if $('input[name='+$(this).prop('name')+']').first().attr('max')?
+				name = $(this).attr('name')
+				if $('input[name='+$(this).prop('name')+']').is(':checked') and $('input[name=checks]:checked').length <= max and $('input[name=checks]:checked').length >= min
+					$('.error-text.checkbox').remove()
+					window.validitems++
+				else
+					$('.error-text.checkbox').remove()		
+					$('input[name='+$(this).prop('name')+']').first().before('<p class="error-text checkbox">Select at least ' + min + ' boxes!</p>')
+				console.log validitems, totalitems
+			if window.totalitems is window.validitems
+				unless thisStep.attr('id') is "last-step"
+					thisStep.slideUp()
+					thisStep.next('.step').slideDown()
+				else 
+					form.submit()
 
 
 
