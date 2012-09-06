@@ -71,6 +71,11 @@ Installation
 	 <script src="http://code.jquery.com/jquery-latest-min.js"></script>  
 	 <script type="text/javascript" src="autovalid/autovalid.js"></script>  
 	 <link rel="stylesheet" href="autovalid/autovalid.css">
+
+	 <script type="text/javascript">
+	 	$(function() {
+	 	  $('#form').autoValid();
+	    });
 	 ```
 4. That's it! Now create an awesome form in seconds and enjoy!
 
