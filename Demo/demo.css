@@ -1,33 +1,69 @@
-form .step {
+/* Stuff you should edit as needed */
+
+.autovalid-form {
+	position: relative;
+}
+
+.autovalid-form .progress-bar {
+	width: 150px;
+	height: 15px;
+	border: 1px solid rgba(0,0,0,.2);
+	border-radius: 15px;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background: white;
+	padding: 0;
+	box-shadow: inset 0px 1px 1px rgba(0,0,0,.5), 0px 1px rgba(255,255,255,.3);
+}
+
+.autovalid-form .progress {
+	background: #89c730;
+	border-radius: 15px;
+	height: 100%;
+	width: 0;
+	box-shadow: inset 0px 0px 1px rgba(0,0,0,.2);
+}
+
+a.back {
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+	color:#30a9c7;
+	text-shadow: 0px 1px rgba(0,0,0,.2);
+	background: url('back.png');
+	width: 25px;
+	height: 22px;
+}
+a.back:hover {
+	opacity: 0.9;
+}
+
+/* Stuff you probably won't need to edit */
+.autovalid-form .step {
 	display: none;
 }
-#form :first-child {
-	display: block;
-}
-#form input[type=text], #form input[type=email], #form input[type=password] {
-	min-height: 24px;
-	min-width: 172px;
-	border-radius: 10px;
-	border: 1px solid rgba(0, 0, 0, .3);
+.autovalid-form input[type=text], .autovalid-form input[type=email], .autovalid-form input[type=password] {
 	outline-style: none;
 	outline:none;
 }
-#form input[type=text]:focus, #form input[type=email]:focus, #form input[type=password]:focus {
-	box-shadow: 0px 0px 5px rgba(50,50,200,.7);
+.autovalid-form input[type=text]:focus, .autovalid-form input[type=email]:focus, .autovalid-form input[type=password]:focus, .autovalid-form textarea:focus {
+	box-shadow: 0px 0px 5px rgba(0,183,240,.5);
 }
-#form input[type=text].success,#form input[type=email].success,#form input[type=password].success {
-	background: white url('https://github.com/coopermaruyama/autovalid/blob/master/Demo/input-success-small.png?raw=true') no-repeat 97% center;
+.autovalid-form input[type=text].success,.autovalid-form input[type=email].success,.autovalid-form input[type=password].success, .autovalid-form textarea.success  {
+	background: white url('input-success-small.png') no-repeat 97% center;
 	box-shadow: 0px 0px 4px rgba(10,240,10,.5);
 }
-#form input[type=text].error,#form input[type=email].error,#form input[type=password].error {
-	background: white url('https://github.com/coopermaruyama/autovalid/blob/master/Demo/input-error-small.png?raw=true') no-repeat 97% center;
+.autovalid-form input[type=text].error,.autovalid-form input[type=email].error,.autovalid-form input[type=password].error, .autovalid-form textarea.error {
+	background: white url('input-error-small.png') no-repeat 97% center;
 	box-shadow: 0px 0px 4px rgba(240,10,10,.5);
 }
-#form select.error {
+.autovalid-form select.error {
 	border: 1px solid red;
 }
-#form .error-text {
+.autovalid-form .error-text {
 	color: red;
 	font-weight: bold;
 	font-size: 10px;
 }
+

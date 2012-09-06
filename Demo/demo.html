@@ -1,164 +1,239 @@
 <html>
 	<head>
 		<title>AutoValid</title>
-		<script type="text/javascript" src="autovalid.js"></script>
-		<link rel="stylesheet" href="autovalid.css">
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<script type="text/javascript" src="demo.js"></script>
+		<link rel="stylesheet" href="demo.css">
 		<style type="text/css">
-		/* DEMO CSS */
-			html,body {
-				margin:0;
-				height: 100%;
-				width: 100%;
-						
+			.clr {
+				clear:both;
 			}
-			#form-container {
-
-				width: 420px;
-				height: 724px;
-				background-color: #466c9b;
-				border-radius: 10px;
-				border: 1px solid #2f4d70;
-				z-index:3;
+			.wrapper {
+				width: 960px;
 				margin: 0 auto;
 			}
-			#form-inner {
-				background: #f9f9f9; /* Old browsers */
-				background: -moz-linear-gradient(left, #f9f9f9 0%, #ffffff 50%, #f9f9f9 100%); /* FF3.6+ */
-				background: -webkit-gradient(linear, left top, right top, color-stop(0%,#f9f9f9), color-stop(50%,#ffffff), color-stop(100%,#f9f9f9)); /* Chrome,Safari4+ */
-				background: -webkit-linear-gradient(left, #f9f9f9 0%,#ffffff 50%,#f9f9f9 100%); /* Chrome10+,Safari5.1+ */
-				background: -o-linear-gradient(left, #f9f9f9 0%,#ffffff 50%,#f9f9f9 100%); /* Opera 11.10+ */
-				background: -ms-linear-gradient(left, #f9f9f9 0%,#ffffff 50%,#f9f9f9 100%); /* IE10+ */
-				background: linear-gradient(to right, #f9f9f9 0%,#ffffff 50%,#f9f9f9 100%); /* W3C */
-				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9f9f9', endColorstr='#f9f9f9',GradientType=1 ); /* IE6-9 */
-				width: 370px;
-				height: 675px;
-				margin: 10px auto;
-				padding: 15px;
+
+			#formcontainer {
+				margin: 0 auto;
+				width: 350px;
 				border-radius: 10px;
+				border: 1px solid #85919c;
+				background-image:url('form-bg.png');
+				background-repeat: repeat-x;
+				padding: 20px;
+				box-shadow: 0px 1px 2px rgba(0, 0, 0, .5);
+				font-family: 'Lucida Sans Unicode', 'Lucia Grande', Lucida, Helvetica, Arial;
 			}
-			#formtitle {
-				color: #325175;
-				font-size: 40px;
-				margin: 5px 0px;
+			#formcontainer h2 {
+				color: #ff5a00;
+				font-family: 'Lucida Sans Unicode', 'Lucia Grande', Lucida, Helvetica, Arial;
+				font-weight: bold;
+				font-size: 28px;
+				margin: 0px 0px 5px 10px;
 			}
-			#form-subtitle {
-				font-weight: normal;
-				font-size: 27px;
-				margin-top:-7px;
-				margin-bottom:5px;
+			#form .left, #form .right {
+				width: 45%;
+				padding: 2%;
 			}
-			.form-hr {
-				width: 397px;
-				margin-left:-14px;
-				margin-top: 15px;
-				margin-bottom: 15px;
+			#form .left {float: left;}
+			#form .right {float: right;}
+			#form input[type=text], #form input[type=password], #form input[type=email] {
+				width: 95%;
+				height: 23px;
+				border-radius: 15px;
+				border: 1px solid rgba(0, 0, 0, .2);
+				box-shadow: 0px 1px rgba(255, 255, 255, .3);
+				padding-left: 10px;
+				}
+			#form label {
+				color: #121c24;
+				font-size: 14px;
+				font-family: 'Lucida Sans Unicode', 'Lucia Grande', Lucida, Helvetica, Arial;
 			}
-			#form {
-				margin-left: 90px;	
+			button.submit {
+	background: #bfd255; /* Old browsers */
+background: -moz-linear-gradient(top,  #bfd255 0%, #8eb92a 50%, #72aa00 51%, #9ecb2d 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#bfd255), color-stop(50%,#8eb92a), color-stop(51%,#72aa00), color-stop(100%,#9ecb2d)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #bfd255 0%,#8eb92a 50%,#72aa00 51%,#9ecb2d 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #bfd255 0%,#8eb92a 50%,#72aa00 51%,#9ecb2d 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #bfd255 0%,#8eb92a 50%,#72aa00 51%,#9ecb2d 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #bfd255 0%,#8eb92a 50%,#72aa00 51%,#9ecb2d 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfd255', endColorstr='#9ecb2d',GradientType=0 ); /* IE6-9 */
+
+
+				border: 1px solid rgba(0,0,0,.2);
+				border-radius: 20px;
+				width: 121px;
+				height: 37px;
+				font-family: 'Lucida Sans Unicode', 'Lucia Grande', Lucida, Helvetica, Arial;
+				color: white;
+				font-size: 20px;
+				float: right;
+				margin-right: 15px;
+				text-shadow:  0px -1px rgba(0,0,0,.5);
+				margin-top: 12px;
+				cursor:pointer;
 			}
+			button.submit:hover {
+				opacity: 0.9;
+			}
+			#form input[type=radio] {
+				margin: auto 5px auto 10px;
+			}
+			#form p {
+				margin-top: 3px;
+				margin-bottom:15px;
+			}
+			#form textarea {
+				width: 97%;
+				height: 96px;
+				border-radius: 5px;
+				border: 1px solid rgba(0, 0, 0, .4);
+			}
+			.what-level, .claim-pending,.why-not {display:none;}
 		</style>
+		<script type="text/javascript">
+		$(function() {
+			$('#form').autoValid();
+
+			$('input[name=ssd-apply]').change(function() {
+				if ($(this).val() == "Yes") {
+					$('.claim-pending').show()
+				};
+				if ($(this).val() == "No") {
+					$('.claim-pending').hide()
+				};
+			});
+			$('input[name=claim-pending]').change(function() {
+				if ($(this).val() == "Yes") {
+					$('.what-level').show()
+				};
+				if ($(this).val() == "No") {
+					$('.what-level').hide()
+				};
+			});
+			$('input[name=seen-doctor]').change(function() {
+				if ($(this).val() == "Yes") {
+					$('.why-not').hide()
+				};
+				if ($(this).val() == "No") {
+					$('.why-not').show()
+				};
+			});
+		});
+		</script>
 	</head>
 	<body>
-		<div id="form-container">
-					<div id="form-inner">
-							<!-- START FORM HTML -->
-						<form action="#submitted" id="form">
-							<!-- DONT PUT ANYTHING HERE! -->
-							<div class="step">
-								<p>Name(min 5, max 10):
-								</p>
-								<input type="text" id="name" min="5" max="10" >
-								<p>Phone:
-								</p>
-								<input type="text" id="phone" class="phone">
-								<p>E-mail:
-								</p>
-								<input type="text" id="email" class="email">
-								<p>Checkboxes (at least one):
-								</p>
-								<input type="checkbox" name="checks">1
-								<input type="checkbox" name="checks">2
-								<input type="checkbox" name="checks">3
-								<p>Radio:
-								</p>
-								<input  type="radio" name="radios">1
-								<input type="radio" name="radios">2
-								<input type="radio" name="radios">3
-								<p>Select List</p>
-								<select name="select" >
-									<option value="">Select One</option>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-								</select>
-								<p></p>
-								<input type="submit" class="submit">
-							</div>
-							<div class="step">
-								<p>Name:
-								</p>
-								<input type="text" id="name" min="5" max="10" >
-								<p>Phone:
-								</p>
-								<input type="text" id="phone" class="phone">
-								<p>E-mail:
-								</p>
-								<input type="text" id="email" class="email">
-								<p>Checkboxes (at least one):
-								</p>
-								<input type="checkbox" name="checks2">1
-								<input type="checkbox" name="checks2">2
-								<input type="checkbox" name="checks2">3
-								<p>Radio:
-								</p>
-								<input  type="radio" name="radios2">1
-								<input type="radio" name="radios2">2
-								<input type="radio" name="radios2">3
-								<p>Select List</p>
-								<select name="select" >
-									<option value="">Select One</option>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-								</select>
-								<p></p>
-								<input type="submit" class="submit">
-							</div>
-							<div class="step" id="last-step">
-								<p>Name:
-								</p>
-								<input type="text" id="name" min="5" max="10" >
-								<p>Phone:
-								</p>
-								<input type="text" id="phone" class="phone">
-								<p>E-mail:
-								</p>
-								<input type="text" id="email" class="email">
-								<p>Checkboxes (at least one):
-								</p>
-								<input type="checkbox" name="checks3">1
-								<input type="checkbox" name="checks3">2
-								<input type="checkbox" name="checks3">3
-								<p>Radio:
-								</p>
-								<input  type="radio" name="radios3">1
-								<input type="radio" name="radios3">2
-								<input type="radio" name="radios3">3
-								<p>Select List</p>
-								<select name="select" >
-									<option value="">Select One</option>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-								</select>
-								<p></p>
-								<input type="submit" class="submit">
-							</div>
-								<!-- START HIDDEN INPUTS, ETC  -->
-								<!-- END HIDDEN INPUTS, ETC -->
-						</form>
-						<!-- END FORM HTML -->
+		<div class="wrapper">
+			<div id="formcontainer">
+				<form action="#" id="form">
+					<h2>Start Here</h2>
+					<div class="progress-bar">
+						<div class="progress"></div>
 					</div>
-				</div>
+					<div class="step">
+						<label for="work-disability" class="radio">Required Radio:</label>
+						<p>
+							<input type="radio" name="work-disability" value="yes"><span class="radio">Yes</span>
+							<input type="radio" name="work-disability" value="no"><span class="radio">No</span>
+						</p>
+						<label for="ssd-apply" class="radio">Optional Radio that does cool stuff if you choose "yes":</label>
+						<p>
+							<input type="radio" name="ssd-apply" value="Yes"><span class="radio">Yes</span>
+							<input type="radio" name="ssd-apply" value="No"  optional="yes"><span class="radio">No</span>
+						</p>
+						<label class="claim-pending" for="claim-pending">Now this is required:</label>
+						<p class="claim-pending">
+							<input type="radio" value="Yes" name="claim-pending">
+							<span>Yes</span>
+							<input type="radio" value="No" name="claim-pending">
+							<span>No</span>
+						</p>
+						<label for="what-level" class="what-level">What Level?</label>
+						<p class="what-level">
+							<select name="what-level" id="what-level">
+								<option value="">Please Select</option>
+								<option value="Initial">Initial</option>
+								<option value="Reconsideration">Reconsideration</option>
+								<option value="Administrative Law Judge">Administrative Law Judge</option>
+								<option value="Appeals Council">Appeals Council</option>
+							</select>
+						</p>
+						<label for="seen-doctor">Have you seen a doctor?</label>
+						<p>
+							<input type="radio" value="Yes" name="seen-doctor">
+							<span>Yes</span>
+							<input type="radio" value="No" name="seen-doctor">
+							<span>No</span>
+							</span>
+						</p>
+						<label for="why-not" class="why-not">Why Not?</label>
+						<br>
+						<textarea name="why-not" id="why-not" class="why-not"></textarea>	
+						<button class="submit">Submit</button>
+					</div>
+					<div class="step">
+						<label for="age">What is your age?</label>
+						<p>
+							<select name="age" id="age">
+								<option value="">Please Select
+								</option>
+								<option value="Under 18 years">Under 18 years
+								</option>
+								<option value="19-29 years">19-29 Years
+								</option>
+								<option value="30-39 years">30-39 Years
+								</option>
+								<option value="40-49 years">40-49 Years
+								</option>
+								<option value="50-59 years">50-59 Years
+								</option>
+								<option value="60-64 years">60-64 Years
+								</option>
+								<option value="65 and over">65 and over
+								</option>
+							</select>
+						</p>
+						<label for="attorney-helping">Is an attorney or advocate already helping you with your disability case?</label>
+						<p>
+							<input type="radio" name="attorney-helping" value="Yes"><span>Yes</span>
+							<input type="radio" name="attorney-helping" value="No"><span>No</span>
+						</p>
+						<label for="describe">Please describe your disability</label>
+						<textarea name="describe"></textarea>
+						<button class="submit">Continue</button>
+					</div>
+					<div class="step" id="last-step">
+						<div class="left">
+							<label for="firstname">First Name</label>
+							<input type="text" name="firstname">
+						</div>
+						<div class="right">
+							<label for="lastname">Last Name</label>
+							<input type="text" name="lastname">
+						</div>
+						<div class="clr"></div>
+						<div class="left">
+							<label for="email">Email</label>
+							<input type="text" name="email" class="email">
+						</div>
+						<div class="right">
+							<label for="phone">Phone Number</label>
+							<input type="text" name="phone" class="phone">
+						</div>
+						<div class="left">
+							<label for="email">Address (Optional)</label>
+							<input type="text" optional="yes" name="address">
+						</div>
+						<div class="right">
+							<label for="phone">City</label>
+							<input type="text" name="zip">
+						</div>
+						<button class="submit">Submit</button>
+					</div>
+					<div class="clr"></div>
+				</form>
+			</div>
+		</div>	
 	</body>
 </html>

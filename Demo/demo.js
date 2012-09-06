@@ -41,7 +41,7 @@
   window.validateText = function(text, min, max) {
     var increment, totalitems, validitems;
     validitems = 0;
-    totalitems = 4;
+    totalitems = 3;
     if (min == null) {
       min = 3;
     }
@@ -58,9 +58,6 @@
       increment();
     }
     if (!tooLong(text, max)) {
-      increment();
-    }
-    if (nameinput.regex.test(text)) {
       increment();
     }
     if (validitems < totalitems) {
@@ -105,9 +102,10 @@
 
   $.fn.extend({
     autoValid: function(options) {
-      var form, log, settings, step;
+      var currentStep, form, log, settings, step;
       settings = {
-        debug: true
+        debug: true,
+        progressbar: true
       };
       settings = $.extend(settings, options);
       log = function(msg) {
@@ -115,9 +113,13 @@
           return typeof console !== "undefined" && console !== null ? console.log(msg) : void 0;
         }
       };
+      this.addClass('autovalid-form');
+      this.find('.step').first().css('display', 'block');
+      this.find('.step:not(:first)').append('<a href="#" class="back"></a>');
       window.valid = false;
       form = this;
       step = $('.step', this);
+      currentStep = 0;
       $("input:not([type=image],[type=button],[type=submit],[type=radio],[type=checkbox])", form).keyup(function() {
         var min, _ref;
         min = (_ref = ($(this)).attr('min')) != null ? _ref : 3;
@@ -181,13 +183,20 @@
           return $(this).addClass('error');
         }
       });
-      return $('.step .submit', form).click(function(e) {
-        var thisStep;
+      ($('textarea', form)).change(function() {
+        if (($(this).val() != null) && ($(this)).val() !== '') {
+          return $(this).removeClass('error').addClass('success').attr('valid', 'true');
+        } else {
+          return $(this).removeClass('success').addClass('error').attr('valid', 'false');
+        }
+      });
+      $('.step .submit', form).click(function(e) {
+        var progress, thisStep;
         thisStep = $(this).closest('.step');
         e.preventDefault();
         window.totalitems = 0;
         window.validitems = 0;
-        $('input:not([type=image],[type=button],[type=submit],[type=radio],[type=checkbox])', thisStep).each(function() {
+        $('input:not([type=image],[type=button],[type=submit],[type=radio],[type=checkbox]):visible', thisStep).each(function() {
           window.totalitems++;
           if ($(this).attr('valid') === 'true' || ($(this)).attr('optional') === "yes") {
             window.validitems++;
@@ -195,9 +204,18 @@
             $(this).removeClass('success').addClass('error').focus();
             false;
           }
-          return console.log(validitems, totalitems);
+          return log(validitems + " " + totalitems);
         });
-        $('select', thisStep).each(function() {
+        ($('textarea', thisStep)).each(function() {
+          window.totalitems++;
+          if ($(this).attr('valid') === 'true' || ($(this)).attr('optional') === "yes") {
+            return window.validitems++;
+          } else {
+            $(this).removeClass('success').addClass('error').focus();
+            return false;
+          }
+        });
+        $('select:visible', thisStep).each(function() {
           window.totalitems++;
           if (($(this).val() != null) && $(this).val() !== "") {
             window.validitems++;
@@ -210,13 +228,13 @@
           var name;
           name = $(this).attr('name');
           window.totalitems++;
-          if ($('input[name=' + name + ']').is(':checked')) {
+          if ($('input[name=' + name + ']').is(':checked') || $('input[name=' + name + ']:hidden').length || $('input[name=' + name + '][optional=yes]').length) {
             window.validitems++;
           } else {
             $('.error-text.radio').remove();
             $('input[name=' + name + ']').first().before('<p class="error-text radio">Select an option!</p>');
           }
-          return console.log(validitems, totalitems);
+          return log(validitems + " " + totalitems);
         });
         $('input[type=checkbox]', thisStep).each(function() {
           var max, min, name;
@@ -230,7 +248,7 @@
             max = $('input[name=' + $(this).prop('name') + ']').first().attr('max').match(/\d+/);
           }
           name = $(this).attr('name');
-          if ($('input[name=' + $(this).prop('name') + ']').is(':checked') && $('input[name=checks]:checked').length <= max && $('input[name=checks]:checked').length >= min) {
+          if ($('input[name=' + $(this).prop('name') + ']').is(':checked') && $('input[name=checks]:checked').length <= max && $('input[name=checks]:checked').length >= min || $('input[name=' + $(this).prop('name') + ']').length) {
             $('.error-text.checkbox').remove();
             window.validitems++;
           } else {
@@ -242,11 +260,24 @@
         if (window.totalitems === window.validitems) {
           if (thisStep.attr('id') !== "last-step") {
             thisStep.slideUp();
-            return thisStep.next('.step').slideDown();
+            thisStep.next('.step').slideDown();
+            currentStep++;
+            progress = currentStep / ($('.step', form)).size();
+            return $('.progress').css('width', progress * 100 + "%");
           } else {
             return form.submit();
           }
         }
+      });
+      return $('.back', form).click(function(e) {
+        var progress;
+        e.preventDefault();
+        log('clicked');
+        ($(this)).closest('.step').slideUp();
+        ($(this)).closest('.step').prev('.step').slideDown();
+        currentStep--;
+        progress = currentStep / ($('.step', form)).size();
+        return $('.progress').css('width', progress * 100 + "%");
       });
     }
   });

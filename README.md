@@ -1,12 +1,21 @@
 AutoValid
 ==========
-AutoValid is a **simple** javascript dependent on jQuery which allows you to create **sliding multi-step forms with validation** without having to add *any* form of extra javascript to your page. It's extremely convenient if you make many sites with forms on it.
+AutoValid is a **simple** jQuery plugin which allows you to create **sliding multi-step forms with validation**. It's different from other validators because almost all the customization is done in html rather than by setting plugin options. It has cool features like a *progress bar*, *back button* to navigate steps, and *styling* that lets the user know whether their entry is valid while typing.
 
-AutoValid automatically validates all input field types including check boxes, radios, and drop-down lists. It validates string length, emails, phone numbers, and checked box count. It allows you to set a minimum/maximum length on any input field without using javascript.
+AutoValid automatically validates all input field types including checkboxes, radios, and drop-down lists. It validates string length, emails, phone numbers, and checked box count. It allows you to set a minimum/maximum length on any input field without using javascript.
 
-AutoValid is also nice to use because it validates each field independently on it's "onChange" event, so that the user is notified whether what they just typed into a field is valid as soon as they change its value.
+AutoValid is also nice to use because it validates each field independently on it's 'change' and 'keyup' event, so that the user is notified whether what they just typed into a field is valid as soon as they change its value.
 
 See a Demo: [jsFiddle](http://jsfiddle.net/gh/get/jquery/1.7.2/coopermaruyama/autovalid.js/tree/master/Demo/ "AutoValid Demo")
+
+Features
+-------------
+- Automatically appends a 'back' button to each step (except step 1). No markup required!
+- Automatically adds a green 'tick' next to each valid field while you type (or 'error' icon if invalid)
+- By default, every input field is validated. see how to set a field optional below.
+- Set max and min lengths on any text input or checkbox (see below).
+- Includes a progress bar
+- Checks for hidden elements and bypasses them (good form forms where choosing a certain value hides/shows another input field).
 
 How it Works
 -------------
@@ -14,6 +23,7 @@ AutoValid depends on the structure of your form. It's a simple structure that lo
 
    ```html
 	<form id="form">
+		<div class="progress-bar"><div class="progress"></div></div>
 		<div class="step">
 			<input type="text" min="5" max="35">
 			<select>
@@ -39,7 +49,7 @@ AutoValid depends on the structure of your form. It's a simple structure that lo
 
 The basic structure is:
 - A form must have the id of "form"
-- Each step must be it's immediate child with the class "step"
+- Each step must be the form's child with the class of "step"
 - The last step must have the id of "last-step" as well
 - The submit button on each step needs the class "submit"
 
@@ -50,7 +60,6 @@ The above illustrated form has 3 steps. note that min & max attributes on the fi
 - By setting the min attribute and max atribute on a text input, you can set the minimum length and maximum length. 
 - By setting the min attribute on the FIRST checkbox in a set of checkboxes, you can set a minimum amount of checkboxes that must be checked in order to be valid. 
 - By setting the value of an option in a select list to "" (as seen above for 'Select One'), you identify which option is invalid.
-All this, without any javascript :)
 
 Installation
 ---------------

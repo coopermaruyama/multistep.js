@@ -17,14 +17,13 @@ window.tooShort = (string, minlength) -> if string.length >= minlength then fals
 
 window.validateText = (text, min, max) ->
 	validitems = 0
-	totalitems = 4
+	totalitems = 3
 	min = 3 unless min?
 	max = 35 unless max?
 	increment = -> validitems++
 	increment() if !isblank(text)
 	increment() if !tooShort(text, min)
 	increment() if !tooLong(text, max)
-	increment() if nameinput.regex.test(text)
 	if validitems < totalitems then false else true
 	
 window.validateEmail = (email) ->
@@ -48,15 +47,23 @@ $.fn.extend
 
 		settings = #add settings
 			debug: true
+			progressbar: true
+
 
 		settings = $.extend settings, options
 
 		log = (msg) ->
 			console?.log msg if settings.debug
-		#init vars
+
+		
+		#init
+		this.addClass('autovalid-form')
+		this.find('.step').first().css('display','block')
+		this.find('.step:not(:first)').append('<a href="#" class="back"></a>');
 		window.valid = false
 		form = this
 		step = $('.step', this)
+		currentStep = 0
 		#onchange validation
 		$("input:not([type=image],[type=button],[type=submit],[type=radio],[type=checkbox])",form).keyup ->
 			min = ($ this).attr('min') ? 3
@@ -82,6 +89,8 @@ $.fn.extend
 				$('input[name='+$(this).prop('name')+']').first().before('<p class="error-text checkbox">Select at least ' + min + ' boxes!</p>')
 		($ 'select', form).change ->
 			if $(this).val()? and ($ this).val() isnt '' then $(this).removeClass('error') else $(this).addClass('error')
+		($ 'textarea', form).change ->
+			if $(this).val()? and ($ this).val() isnt '' then $(this).removeClass('error').addClass('success').attr('valid', 'true') else $(this).removeClass('success').addClass('error').attr('valid','false')
 		#submit button validation
 		$('.step .submit', form).click (e) ->
 			thisStep = $(this).closest('.step')
@@ -89,16 +98,24 @@ $.fn.extend
 			window.totalitems=0
 			window.validitems=0
 			#validate textboxes
-			$('input:not([type=image],[type=button],[type=submit],[type=radio],[type=checkbox])', thisStep).each ->
+			$('input:not([type=image],[type=button],[type=submit],[type=radio],[type=checkbox]):visible', thisStep).each ->
 				window.totalitems++
 				if $(this).attr('valid') is 'true' or ($ this).attr('optional') is "yes"
 					window.validitems++
 				else
 					$(this).removeClass('success').addClass('error').focus()
 					false
-				console.log validitems, totalitems
+				log validitems + " " + totalitems
+			#validate textarea
+			($ 'textarea', thisStep).each ->
+				window.totalitems++
+				if $(this).attr('valid') is 'true' or ($ this).attr('optional') is "yes"
+					window.validitems++
+				else
+					$(this).removeClass('success').addClass('error').focus()
+					false
 			#validate select lists
-			$('select', thisStep).each ->
+			$('select:visible', thisStep).each ->
 				window.totalitems++
 				if $(this).val()? and $(this).val() isnt ""
 					window.validitems++ 
@@ -109,12 +126,12 @@ $.fn.extend
 			$('input[type=radio]', thisStep).each ->
 				name = $(this).attr('name')
 				window.totalitems++
-				if $('input[name='+name+']').is(':checked')
+				if $('input[name='+name+']').is(':checked') or $('input[name='+name+']:hidden').length or $('input[name='+name+'][optional=yes]').length
 					window.validitems++ 
 				else
 					$('.error-text.radio').remove()
 					$('input[name='+name+']').first().before('<p class="error-text radio">Select an option!</p>')
-				console.log validitems, totalitems
+				log validitems + " " + totalitems
 			# validate checkboxes
 			$('input[type=checkbox]', thisStep).each ->
 				window.totalitems++
@@ -123,7 +140,7 @@ $.fn.extend
 				min = $('input[name='+$(this).prop('name')+']').first().attr('min').match(/\d+/) if $('input[name='+$(this).prop('name')+']').first().attr('min')?
 				max = $('input[name='+$(this).prop('name')+']').first().attr('max').match(/\d+/) if $('input[name='+$(this).prop('name')+']').first().attr('max')?
 				name = $(this).attr('name')
-				if $('input[name='+$(this).prop('name')+']').is(':checked') and $('input[name=checks]:checked').length <= max and $('input[name=checks]:checked').length >= min
+				if $('input[name='+$(this).prop('name')+']').is(':checked') and $('input[name=checks]:checked').length <= max and $('input[name=checks]:checked').length >= min or $('input[name='+$(this).prop('name')+']').length #or if any are hidden
 					$('.error-text.checkbox').remove()
 					window.validitems++
 				else
@@ -134,8 +151,21 @@ $.fn.extend
 				unless thisStep.attr('id') is "last-step"
 					thisStep.slideUp()
 					thisStep.next('.step').slideDown()
+					currentStep++
+					progress = currentStep/($ '.step', form).size()
+					$('.progress').css('width', progress*100+"%")
 				else 
 					form.submit()
+
+		#back button
+		$('.back', form).click (e) ->
+			e.preventDefault()
+			log 'clicked'
+			($ this).closest('.step').slideUp()
+			($ this).closest('.step').prev('.step').slideDown()	
+			currentStep--
+			progress = currentStep/($ '.step', form).size()
+			$('.progress').css('width', progress*100+"%")
 
 
 
