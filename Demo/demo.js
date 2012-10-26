@@ -2,10 +2,41 @@
 (function() {
   var $;
 
+  (function($) {
+    return $.fn.listenForChange = function(options) {
+      var current_focus, jquery_object, settings;
+      settings = $.extend({
+        interval: 200
+      }, options);
+      jquery_object = this;
+      current_focus = null;
+      jquery_object.filter(":input").add(":input", jquery_object).focus(function() {
+        return current_focus = this;
+      }).blur(function() {
+        return current_focus = null;
+      });
+      setInterval((function() {
+        return jquery_object.filter(":input").add(":input", jquery_object).each(function() {
+          if ($(this).data("change_listener") === undefined) {
+            $(this).data("change_listener", $(this).val());
+            return;
+          }
+          if ($(this).data("change_listener") === $(this).val()) {
+            return;
+          }
+          $(this).trigger("change");
+          $(this).trigger("keyup");
+          return $(this).data("change_listener", $(this).val());
+        });
+      }), settings.interval);
+      return this;
+    };
+  })(jQuery);
+
   window.nameinput = {
     maxlength: 35,
     lettersonly: true,
-    regex: /^[a-zA-Z ]+$/,
+    regex: /^[a-zA-Z0-9 ]+$/,
     notblank: true
   };
 
@@ -41,7 +72,7 @@
   window.validateText = function(text, min, max) {
     var increment, totalitems, validitems;
     validitems = 0;
-    totalitems = 3;
+    totalitems = 4;
     if (min == null) {
       min = 3;
     }
@@ -58,6 +89,9 @@
       increment();
     }
     if (!tooLong(text, max)) {
+      increment();
+    }
+    if (nameinput.regex.test(text)) {
       increment();
     }
     if (validitems < totalitems) {
@@ -102,7 +136,7 @@
 
   $.fn.extend({
     autoValid: function(options) {
-      var currentStep, form, log, settings, step;
+      var currentStep, form, log, settings, specialClasses, step;
       settings = {
         debug: true,
         progressbar: true
@@ -114,16 +148,24 @@
         }
       };
       this.addClass('autovalid-form');
+      $('input,select', this).each(function() {
+        return $(this).listenForChange();
+      });
       this.find('.step').first().css('display', 'block');
       this.find('.step:not(:first)').append('<a href="#" class="back"></a>');
       window.valid = false;
       form = this;
       step = $('.step', this);
       currentStep = 0;
+      specialClasses = ["phone", "zip", "email"];
+      window.specialRegEx = new RegExp(specialClasses.join("|"));
       $("input:not([type=image],[type=button],[type=submit],[type=radio],[type=checkbox])", form).keyup(function() {
-        var min, _ref;
+        var min, skip, _ref;
         min = (_ref = ($(this)).attr('min')) != null ? _ref : 3;
-        if (!(($(this)).attr('optional') === "yes" || ($(this)).val().length < min)) {
+        if ((($(this)).attr('class') != null) && ((($(this)).attr('class')).match(specialRegEx) != null)) {
+          skip = true;
+        }
+        if (!(($(this)).attr('optional') === "yes" || ($(this)).val().length < min || (skip != null))) {
           if (validateText($(this).val(), min, $(this).attr('max'))) {
             return $(this).removeClass('error').addClass('success').attr('valid', 'true');
           } else {
@@ -150,6 +192,13 @@
           return $(this).addClass('error');
         }
       });
+      ($('input.zip', form)).change(function() {
+        if (is_int($(this).val()) && $(this).val().length === 5) {
+          return $(this).removeClass('error').addClass('success').attr('valid', 'true');
+        } else {
+          return $(this).removeClass('success').addClass('error').attr('valid', 'false');
+        }
+      });
       ($('input[type=radio]', form)).change(function() {
         var name;
         name = $(this).attr('name');
@@ -160,20 +209,22 @@
         }
       });
       ($('input[type=checkbox]', form)).change(function(e) {
-        var max, min;
+        var inputName, max, min;
         min = 1;
         max = 9999;
-        if ($('input[name=' + $(this).prop('name') + ']').first().attr('min') != null) {
-          min = $('input[name=' + $(this).prop('name') + ']').first().attr('min').match(/\d+/);
+        inputName = $(this).prop('name').replace(/\[/, "\\[");
+        inputName = inputName.replace(/\]/, "\\]");
+        if ($('input[name=' + inputName + ']').first().attr('min') != null) {
+          min = $('input[name=' + inputName + ']').first().attr('min').match(/\d+/);
         }
-        if ($('input[name=' + $(this).prop('name') + ']').first().attr('max') != null) {
-          max = $('input[name=' + $(this).prop('name') + ']').first().attr('max').match(/\d+/);
+        if ($('input[name=' + inputName + ']').first().attr('max') != null) {
+          max = $('input[name=' + inputName + ']').first().attr('max').match(/\d+/);
         }
-        if ($('input[name=' + $(this).prop('name') + ']').is(':checked') && $('input[name=checks]:checked').length <= max && $('input[name=checks]:checked').length >= min) {
+        if ($('input[name=' + inputName + ']').is(':checked') && $('input[name=checks]:checked').length <= max && $('input[name=checks]:checked').length >= min) {
           return $('.error-text.checkbox').remove();
         } else {
           $('.error-text.checkbox').remove();
-          return $('input[name=' + $(this).prop('name') + ']').first().before('<p class="error-text checkbox">Select at least ' + min + ' boxes!</p>');
+          return $('input[name=' + inputName + ']').first().before('<p class="error-text checkbox" style="top:' + ($('input[name=' + inputName + ']').first().position().top - 20) + 'px;">Select at least ' + min + ' boxes!</p>');
         }
       });
       ($('select', form)).change(function() {
@@ -206,7 +257,7 @@
           }
           return log(validitems + " " + totalitems);
         });
-        ($('textarea', thisStep)).each(function() {
+        ($('textarea:visible', thisStep)).each(function() {
           window.totalitems++;
           if ($(this).attr('valid') === 'true' || ($(this)).attr('optional') === "yes") {
             return window.validitems++;
@@ -237,23 +288,25 @@
           return log(validitems + " " + totalitems);
         });
         $('input[type=checkbox]', thisStep).each(function() {
-          var max, min, name;
+          var inputName, max, min, name;
           window.totalitems++;
           min = 1;
           max = 9999;
-          if ($('input[name=' + $(this).prop('name') + ']').first().attr('min') != null) {
-            min = $('input[name=' + $(this).prop('name') + ']').first().attr('min').match(/\d+/);
+          inputName = $(this).prop('name').replace(/\[/, "\\[");
+          inputName = inputName.replace(/\]/, "\\]");
+          if ($('input[name=' + inputName + ']').first().attr('min') != null) {
+            min = $('input[name=' + inputName + ']').first().attr('min').match(/\d+/);
           }
-          if ($('input[name=' + $(this).prop('name') + ']').first().attr('max') != null) {
-            max = $('input[name=' + $(this).prop('name') + ']').first().attr('max').match(/\d+/);
+          if ($('input[name=' + inputName + ']').first().attr('max') != null) {
+            max = $('input[name=' + inputName + ']').first().attr('max').match(/\d+/);
           }
           name = $(this).attr('name');
-          if ($('input[name=' + $(this).prop('name') + ']').is(':checked') && $('input[name=checks]:checked').length <= max && $('input[name=checks]:checked').length >= min || $('input[name=' + $(this).prop('name') + ']').length) {
+          if ($('input[name=' + inputName + ']').is(':checked') && $('input[name=checks]:checked').length <= max && $('input[name=checks]:checked').length >= min || $('input[name=' + inputName + ']').length) {
             $('.error-text.checkbox').remove();
             window.validitems++;
           } else {
             $('.error-text.checkbox').remove();
-            $('input[name=' + $(this).prop('name') + ']').first().before('<p class="error-text checkbox">Select at least ' + min + ' boxes!</p>');
+            $('input[name=' + inputName + ']').first().before('<p class="error-text checkbox" style="top:' + ($('input[name=' + inputName + ']').first().position().top - 20) + 'px;">Select at least ' + min + ' boxes!</p>');
           }
           return console.log(validitems, totalitems);
         });

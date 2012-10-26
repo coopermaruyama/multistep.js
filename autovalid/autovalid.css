@@ -62,8 +62,12 @@ a.back:hover {
 	border: 1px solid red;
 }
 .autovalid-form .error-text {
-	color: red;
+	color: rgba(255,0,0,.75);
 	font-weight: bold;
 	font-size: 10px;
+	margin: 0px auto !important;
 }
 
+.autovalid-form .checkbox.error-text {
+	position:absolute;
+}
