@@ -31,7 +31,7 @@ a.back {
 	left: 10px;
 	color:#30a9c7;
 	text-shadow: 0px 1px rgba(0,0,0,.2);
-	background: url('back.png');
+	background: url('https://raw.github.com/coopermaruyama/autovalid.js/master/Demo/back.png');
 	width: 25px;
 	height: 22px;
 }
