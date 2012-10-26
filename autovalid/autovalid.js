@@ -220,7 +220,7 @@
         if ($('input[name=' + inputName + ']').first().attr('max') != null) {
           max = $('input[name=' + inputName + ']').first().attr('max').match(/\d+/);
         }
-        if ($('input[name=' + inputName + ']').is(':checked') && $('input[name=checks]:checked').length <= max && $('input[name=checks]:checked').length >= min) {
+        if ($('input[name=' + inputName + ']').is(':checked') && $('input[name=' + inputName + ']:checked').length <= max && $('input[name=' + inputName + ']:checked').length >= min) {
           return $('.error-text.checkbox').remove();
         } else {
           $('.error-text.checkbox').remove();
@@ -301,7 +301,7 @@
             max = $('input[name=' + inputName + ']').first().attr('max').match(/\d+/);
           }
           name = $(this).attr('name');
-          if ($('input[name=' + inputName + ']').is(':checked') && $('input[name=checks]:checked').length <= max && $('input[name=checks]:checked').length >= min || $('input[name=' + inputName + ']').length) {
+          if ($('input[name=' + inputName + ']').is(':checked') && $('input[name=' + inputName + ']:checked').length <= max && $('input[name=' + inputName + ']:checked').length >= min || $('input[name=' + inputName + ']').length) {
             $('.error-text.checkbox').remove();
             window.validitems++;
           } else {

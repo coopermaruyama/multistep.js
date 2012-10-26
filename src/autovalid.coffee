@@ -129,7 +129,7 @@ $.fn.extend
 			inputName = inputName.replace /\]/, "\\]"
 			min = $('input[name='+inputName+']').first().attr('min').match(/\d+/) if $('input[name='+inputName+']').first().attr('min')?
 			max = $('input[name='+inputName+']').first().attr('max').match(/\d+/) if $('input[name='+inputName+']').first().attr('max')?
-			if $('input[name='+inputName+']').is(':checked') and $('input[name=checks]:checked').length <= max and $('input[name=checks]:checked').length >= min
+			if $('input[name='+inputName+']').is(':checked') and $('input[name='+inputName+']:checked').length <= max and $('input[name='+inputName+']:checked').length >= min
 				$('.error-text.checkbox').remove()
 			else
 				$('.error-text.checkbox').remove()
@@ -189,7 +189,7 @@ $.fn.extend
 				min = $('input[name='+inputName+']').first().attr('min').match(/\d+/) if $('input[name='+inputName+']').first().attr('min')?
 				max = $('input[name='+inputName+']').first().attr('max').match(/\d+/) if $('input[name='+inputName+']').first().attr('max')?
 				name = $(this).attr('name')
-				if $('input[name='+inputName+']').is(':checked') and $('input[name=checks]:checked').length <= max and $('input[name=checks]:checked').length >= min or $('input[name='+inputName+']').length #or if any are hidden
+				if $('input[name='+inputName+']').is(':checked') and $('input[name='+inputName+']:checked').length <= max and $('input[name='+inputName+']:checked').length >= min or $('input[name='+inputName+']').length #or if any are hidden
 					$('.error-text.checkbox').remove()
 					window.validitems++
 				else
