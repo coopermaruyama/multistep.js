@@ -309,7 +309,7 @@ $.fn.extend
 		
 		#init
 		this.addClass('autovalid-form')
-		$('input[type=text],input[type=email]',this).each ->
+		$('input[type=text],input[type=email],textarea',this).each ->
 			$(this).listenForChange()
 		this.find('.step').first().css('display','block')
 		this.find('.step:not(:first)').append('<a href="#" class="back"></a>');

@@ -443,7 +443,7 @@
         }
       };
       this.addClass('autovalid-form');
-      $('input[type=text],input[type=email]', this).each(function() {
+      $('input[type=text],input[type=email],textarea', this).each(function() {
         return $(this).listenForChange();
       });
       this.find('.step').first().css('display', 'block');
