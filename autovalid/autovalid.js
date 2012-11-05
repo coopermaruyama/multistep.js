@@ -528,7 +528,7 @@
           return $(this).addClass('error');
         }
       });
-      ($('textarea', form)).change(function() {
+      ($('textarea', form)).keyup(function() {
         if (($(this).val() != null) && ($(this)).val() !== '') {
           return $(this).removeClass('error').addClass('success').attr('valid', 'true');
         } else {

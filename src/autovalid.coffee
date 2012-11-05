@@ -352,7 +352,7 @@ $.fn.extend
 				$('input[name='+inputName+']').first().attr('original-title','Select at least ' + min + ' boxes!').tipsy("show")
 		($ 'select', form).change ->
 			if $(this).val()? and ($ this).val() isnt '' then $(this).removeClass('error') else $(this).addClass('error')
-		($ 'textarea', form).change ->
+		($ 'textarea', form).keyup ->
 			if $(this).val()? and ($ this).val() isnt '' then $(this).removeClass('error').addClass('success').attr('valid', 'true') else $(this).removeClass('success').addClass('error').attr('valid','false')
 		#submit button validation
 		$('.step .submit', form).click (e) ->
