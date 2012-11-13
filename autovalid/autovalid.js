@@ -535,7 +535,7 @@
           return $(this).removeClass('success').addClass('error').attr('valid', 'false');
         }
       });
-      $('.step .submit', form).click(function(e) {
+      return $('.step .submit', form).click(function(e) {
         var progress, thisStep;
         thisStep = $(this).closest('.step');
         e.preventDefault();
@@ -611,21 +611,23 @@
             thisStep.next('.step').slideDown();
             currentStep++;
             progress = currentStep / ($('.step', form)).size();
-            return $('.progress').css('width', progress * 100 + "%");
+            $('.progress').css('width', progress * 100 + "%");
           } else {
-            return form.submit();
+            if (options.beforeSubmit != null) {
+              options.beforeSubmit();
+            }
+            form.submit();
           }
         }
-      });
-      return $('.back', form).click(function(e) {
-        var progress;
-        e.preventDefault();
-        log('clicked');
-        ($(this)).closest('.step').slideUp();
-        ($(this)).closest('.step').prev('.step').slideDown();
-        currentStep--;
-        progress = currentStep / ($('.step', form)).size();
-        return $('.progress').css('width', progress * 100 + "%");
+        return $('.back', form).click(function(e) {
+          e.preventDefault();
+          log('clicked');
+          ($(this)).closest('.step').slideUp();
+          ($(this)).closest('.step').prev('.step').slideDown();
+          currentStep--;
+          progress = currentStep / ($('.step', form)).size();
+          return $('.progress').css('width', progress * 100 + "%");
+        });
       });
     }
   });
