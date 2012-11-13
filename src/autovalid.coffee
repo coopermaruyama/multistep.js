@@ -417,18 +417,19 @@ $.fn.extend
 					currentStep++
 					progress = currentStep/($ '.step', form).size()
 					$('.progress').css('width', progress*100+"%")
-				else 
+				else
+					options.beforeSubmit() if options.beforeSubmit?
 					form.submit()
 
-		#back button
-		$('.back', form).click (e) ->
-			e.preventDefault()
-			log 'clicked'
-			($ this).closest('.step').slideUp()
-			($ this).closest('.step').prev('.step').slideDown()	
-			currentStep--
-			progress = currentStep/($ '.step', form).size()
-			$('.progress').css('width', progress*100+"%")
+			#back button
+			$('.back', form).click (e) ->
+				e.preventDefault()
+				log 'clicked'
+				($ this).closest('.step').slideUp()
+				($ this).closest('.step').prev('.step').slideDown()	
+				currentStep--
+				progress = currentStep/($ '.step', form).size()
+				$('.progress').css('width', progress*100+"%")
 $ ->
 	$('input:not([type=button],[type=image],[type=submit],[type=radio],[type=checkbox]),select').each ->
 		$(this).tipsy({trigger: 'manual', gravity: 'w', fallback: 'fix this field!'})
