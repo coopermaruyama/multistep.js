@@ -613,7 +613,7 @@
             progress = currentStep / ($('.step', form)).size();
             $('.progress').css('width', progress * 100 + "%");
           } else {
-            if (options.beforeSubmit != null) {
+            if ((options != null ? options.beforeSubmit : void 0) != null) {
               options.beforeSubmit();
             }
             form.submit();

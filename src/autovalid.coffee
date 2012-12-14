@@ -418,7 +418,7 @@ $.fn.extend
 					progress = currentStep/($ '.step', form).size()
 					$('.progress').css('width', progress*100+"%")
 				else
-					options.beforeSubmit() if options.beforeSubmit?
+					options.beforeSubmit() if options?.beforeSubmit?
 					form.submit()
 
 			#back button
