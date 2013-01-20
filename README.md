@@ -1,6 +1,6 @@
 Multistep.js
 ==========
-Multistep is a **simple** jQuery plugin which allows you to create **sliding multi-step forms with validation**. It's different from other validators because almost all the customization is done in html rather than by setting plugin options. It has cool features like a *progress bar*, *back button* to navigate steps, and *styling* that lets the user know whether their entry is valid while typing.
+Multistep.js is a **simple** jQuery plugin which allows you to create **sliding multi-step forms with validation**. It's different from other validators because almost all the customization is done in html rather than by setting plugin options. It has cool features like a *progress bar*, *back button* to navigate steps, and *styling* that lets the user know whether their entry is valid while typing.
 
 Multistep automatically validates all input field types including checkboxes, radios, and drop-down lists. It validates string length, emails, phone numbers, and checked box count. It allows you to set a minimum/maximum length on any input field without using javascript.
 
@@ -84,5 +84,3 @@ You can always look at demo.html included in the ZIP file to see an example.
 Notes
 ----------
 Multistep is compiled from Coffeescript into Javascript. The original Coffeescript is included in the src folder within the ZIP for you to edit.
-
-My goal with Multistep is to make creating multi-step forms easy and simple. I realize that I could have created a plugin and call validation like $('#element').multistep() but I like the idea of zero javascript knowledge required to use this. If you'd like this to be a plugin let me know and I'll create it or you can fork it yourself.
