@@ -1,4 +1,4 @@
-Multistep
+Multistep.js
 ==========
 Multistep is a **simple** jQuery plugin which allows you to create **sliding multi-step forms with validation**. It's different from other validators because almost all the customization is done in html rather than by setting plugin options. It has cool features like a *progress bar*, *back button* to navigate steps, and *styling* that lets the user know whether their entry is valid while typing.
 
