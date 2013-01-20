@@ -31,7 +31,7 @@ a.back {
 	left: 10px;
 	color:#30a9c7;
 	text-shadow: 0px 1px rgba(0,0,0,.2);
-	background: url('https://raw.github.com/coopermaruyama/multistep.js/master/Demo/back.png');
+	background: url('back.png');
 	width: 25px;
 	height: 22px;
 }
@@ -51,11 +51,11 @@ a.back:hover {
 	box-shadow: 0px 0px 5px rgba(0,183,240,.5);
 }
 .multistep-form input[type=text].success,.multistep-form input[type=email].success,.multistep-form input[type=password].success, .multistep-form textarea.success  {
-	background: white url('https://raw.github.com/coopermaruyama/multistep.js/master/Demo/input-success-small.png') no-repeat 97% center;
+	background: white url('input-success-small.png') no-repeat 97% center;
 	box-shadow: 0px 0px 4px rgba(10,240,10,.5);
 }
 .multistep-form input[type=text].error,.multistep-form input[type=email].error,.multistep-form input[type=password].error, .multistep-form textarea.error {
-	background: white url('https://raw.github.com/coopermaruyama/multistep.js/master/Demo/input-error-small.png') no-repeat 97% center;
+	background: white url('input-error-small.png') no-repeat 97% center;
 	box-shadow: 0px 0px 4px rgba(240,10,10,.5);
 }
 .multistep-form select.error {
@@ -72,6 +72,7 @@ a.back:hover {
 	position:absolute;
 }
 
+/* Tipsy */
 .tipsy { font-size: 10px; position: absolute; padding: 5px; z-index: 100000; }
   .tipsy-inner { background-color: #000; color: #FFF; max-width: 200px; padding: 5px 8px 4px 8px; text-align: center; }
 

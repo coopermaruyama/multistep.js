@@ -294,7 +294,7 @@ window.is_int = (value) ->
 $ = jQuery
 
 $.fn.extend
-	autoValid: (options) ->
+	multistep: (options) ->
 
 		settings = #add settings
 			debug: true
@@ -308,7 +308,7 @@ $.fn.extend
 
 		
 		#init
-		this.addClass('autovalid-form')
+		this.addClass('multistep-form')
 		$('input[type=text],input[type=email],textarea',this).each ->
 			$(this).listenForChange()
 		this.find('.step').first().css('display','block')

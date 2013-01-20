@@ -430,7 +430,7 @@
   $ = jQuery;
 
   $.fn.extend({
-    autoValid: function(options) {
+    multistep: function(options) {
       var currentStep, form, log, settings, specialClasses, step;
       settings = {
         debug: true,
@@ -442,7 +442,7 @@
           return typeof console !== "undefined" && console !== null ? console.log(msg) : void 0;
         }
       };
-      this.addClass('autovalid-form');
+      this.addClass('multistep-form');
       $('input[type=text],input[type=email],textarea', this).each(function() {
         return $(this).listenForChange();
       });

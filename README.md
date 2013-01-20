@@ -1,12 +1,12 @@
-AutoValid
+Multistep
 ==========
-AutoValid is a **simple** jQuery plugin which allows you to create **sliding multi-step forms with validation**. It's different from other validators because almost all the customization is done in html rather than by setting plugin options. It has cool features like a *progress bar*, *back button* to navigate steps, and *styling* that lets the user know whether their entry is valid while typing.
+Multistep is a **simple** jQuery plugin which allows you to create **sliding multi-step forms with validation**. It's different from other validators because almost all the customization is done in html rather than by setting plugin options. It has cool features like a *progress bar*, *back button* to navigate steps, and *styling* that lets the user know whether their entry is valid while typing.
 
-AutoValid automatically validates all input field types including checkboxes, radios, and drop-down lists. It validates string length, emails, phone numbers, and checked box count. It allows you to set a minimum/maximum length on any input field without using javascript.
+Multistep automatically validates all input field types including checkboxes, radios, and drop-down lists. It validates string length, emails, phone numbers, and checked box count. It allows you to set a minimum/maximum length on any input field without using javascript.
 
-AutoValid is also nice to use because it validates each field independently on it's 'change' and 'keyup' event, so that the user is notified whether what they just typed into a field is valid as soon as they change its value.
+Multistep is also nice to use because it validates each field independently on it's 'change' and 'keyup' event, so that the user is notified whether what they just typed into a field is valid as soon as they change its value.
 
-See a Demo: [jsFiddle](http://jsfiddle.net/gh/get/jquery/1.7.2/coopermaruyama/autovalid.js/tree/master/Demo/ "AutoValid Demo")
+See a Demo: [jsFiddle](http://jsfiddle.net/gh/get/jquery/1.7.2/coopermaruyama/multistep.js/tree/master/Demo/ "Multistep Demo")
 
 Features
 -------------
@@ -19,7 +19,7 @@ Features
 
 How it Works
 -------------
-AutoValid depends on the structure of your form. It's a simple structure that looks like so (assuming you have 3 steps):
+Multistep depends on the structure of your form. It's a simple structure that looks like so (assuming you have 3 steps):
 
    ```html
 	<form id="form">
@@ -63,18 +63,18 @@ The above illustrated form has 3 steps. note that min & max attributes on the fi
 
 Installation
 ---------------
-1. Download autovalid [here.](https://github.com/coopermaruyama/autovalid/zipball/master "AutoValid")
-2. Copy the autovalid folder to your website directory.
-3. Add AutoValid to your header like so (assuming Autovalid is in the same directory as the web page):
+1. Download multistep [here.](https://github.com/coopermaruyama/multistep/zipball/master "Multistep")
+2. Copy the multistep folder to your website directory.
+3. Add Multistep to your header like so (assuming multistep is in the same directory as the web page):
 
 	 ```html
 	 <script src="http://code.jquery.com/jquery-latest-min.js"></script>  
-	 <script type="text/javascript" src="autovalid/autovalid.js"></script>  
-	 <link rel="stylesheet" href="autovalid/autovalid.css">
+	 <script type="text/javascript" src="multistep/multistep.js"></script>  
+	 <link rel="stylesheet" href="multistep/multistep.css">
 
 	 <script type="text/javascript">
 	 	$(function() {
-	 	  $('#form').autoValid();
+	 	  $('#form').multistep();
 	    });
 	 ```
 4. That's it! Now create an awesome form in seconds and enjoy!
@@ -83,6 +83,6 @@ You can always look at demo.html included in the ZIP file to see an example.
 
 Notes
 ----------
-AutoValid is compiled from Coffeescript into Javascript. The original Coffeescript is included in the src folder within the ZIP for you to edit.
+Multistep is compiled from Coffeescript into Javascript. The original Coffeescript is included in the src folder within the ZIP for you to edit.
 
-My goal with AutoValid is to make creating multi-step forms easy and simple. I realize that I could have created a plugin and call validation like $('#element').autoValid() but I like the idea of zero javascript knowledge required to use this. If you'd like this to be a plugin let me know and I'll create it or you can fork it yourself.
+My goal with Multistep is to make creating multi-step forms easy and simple. I realize that I could have created a plugin and call validation like $('#element').multistep() but I like the idea of zero javascript knowledge required to use this. If you'd like this to be a plugin let me know and I'll create it or you can fork it yourself.
