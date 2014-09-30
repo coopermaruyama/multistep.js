@@ -1,6 +1,8 @@
-
+/*
 ---
-	name: Multistep
-	description: Simple multi-step form validation
-	authors:
-		- Cooper Maruyama
+name: Multistep
+description: Simple multi-step form validation
+authors:
+  - Cooper Maruyama
+...
+*/
